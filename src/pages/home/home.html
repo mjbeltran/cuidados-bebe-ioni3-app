@@ -1,0 +1,45 @@
+<ion-content class="secondaryBack" padding>
+  <ion-card>
+    <ion-card-header>
+      <h1 class="textCenter">Hola
+        <strong>{{user.nickName}}</strong>
+      </h1>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="flexAround">
+        <button ion-fab mini (click)="goEditProfil()">
+          <ion-icon name="build"></ion-icon>
+        </button>
+        <button ion-fab mini (click)="logout()">
+          <ion-icon name="log-out"></ion-icon>
+        </button>
+      </div>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card padding>
+    <ion-card-header class="textCenter">Bebés</ion-card-header>
+    <ion-card-content>
+      <ion-list *ngIf="user.babies.length>0">
+        <ion-item *ngFor="let baby of user.babies; index as i" (click)="goBabyHome(i)">
+          <p>{{baby.name}}</p>
+          <p>Nacido el: {{baby.getBirhDate()}}</p>
+        </ion-item>
+      </ion-list>
+      <ion-item *ngIf="user.babies.length==0">
+        <p>Ningún bebé añadido</p>
+      </ion-item>
+      <div class="flexAround">
+        <button ion-fab (click)="goAddBaby()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!--<div>
+    <p (click)="goCgu()" color="dark" class="textCenter">Conditions générales d'utilisation</p>
+  </div>-->
+  
+</ion-content>

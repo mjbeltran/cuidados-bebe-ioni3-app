@@ -1,0 +1,216 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{getTitle()}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="secondaryBack" padding>
+
+  <ion-card padding>
+    <div class="flexAround">
+      <button (click)="switchCare('milk')" ion-button [outline]="careType=='milk'? false:true">
+        <i class="flaticon-milk"></i>
+      </button>
+      <button (click)="switchCare('water')" ion-button [outline]="careType=='water'? false:true">
+        <i class="flaticon-water"></i>
+      </button>
+      <button (click)="switchCare('meal')" ion-button [outline]="careType=='meal'? false:true">
+        <ion-icon name="restaurant"></ion-icon>
+      </button>
+      <button (click)="switchCare('nappy')" ion-button [outline]="careType=='nappy'? false:true">
+        <i class="flaticon-nappy"></i>
+      </button>
+      <button (click)="switchCare('bath')" ion-button [outline]="careType=='bath'? false:true">
+        <i class="flaticon-bath"></i>
+      </button>
+    </div>
+    <div class="flexAround">
+      <button (click)="switchCare('sleep')" ion-button [outline]="careType=='sleep'? false:true">
+        <i class="flaticon-sleep"></i>
+      </button>
+      <button (click)="switchCare('weight')" ion-button [outline]="careType=='weight'? false:true">
+        <i class="flaticon-weight"></i>
+      </button>
+      <button (click)="switchCare('size')" ion-button [outline]="careType=='size'? false:true">
+        <ion-icon name="resize"></ion-icon>
+      </button>
+      <button (click)="switchCare('temperature')" ion-button [outline]="careType=='temperature'? false:true">
+        <i class="flaticon-temperature"></i>
+      </button>
+      <button (click)="switchCare('comment')" ion-button [outline]="careType=='comment'? false:true">
+        <i class="flaticon-comment"></i>
+      </button>
+    </div>
+  </ion-card>
+
+  <ion-card padding>
+    <div class="flexAround">
+      <button (click)="setTimeScale('day')" ion-button small [outline]="timeScale=='day'? false:true">
+        24H
+      </button>
+      <button (click)="setTimeScale('week')" ion-button small [outline]="timeScale=='week'? false:true">
+        1 semana
+      </button>
+      <button (click)="setTimeScale('month')" ion-button small [outline]="timeScale=='month'? false:true">
+        1 mes
+      </button>
+      <button (click)="setTimeScale('')" ion-button small [outline]="timeScale==''? false:true">
+        Todos
+      </button>
+    </div>
+    <ion-card-content>
+      <canvas class="myChart" #myChart width="400" height="400"></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card padding>
+    <h2 class="textCenter">{{getTitle()}}</h2>
+
+    <ion-list *ngIf="careType=='milk'">
+      <span *ngFor="let milk of user.currentBaby.milk">
+        <ion-item *ngIf="milk.createDate>getDateLimit()">
+          <p>{{getDateinText(milk.createDate)}}:
+            <strong>{{milk.qte}}ml</strong> par
+            <strong>{{milk.carerName}}</strong>
+          </p>
+          <button ion-button small round outline item-end (click)="editCare(milk)" *ngIf="milk.carerId == user.uid">
+            <ion-icon name="build"></ion-icon>
+          </button>
+        </ion-item>
+      </span>
+    </ion-list>
+
+    <ion-list *ngIf="careType=='water'">
+      <span *ngFor="let water of user.currentBaby.water">
+        <ion-item *ngIf="water.createDate>getDateLimit()">
+          <p>{{getDateinText(water.createDate)}}:
+            <strong>{{water.qte}}ml</strong> par
+            <strong>{{water.carerName}}</strong>
+          </p>
+          <button ion-button small round outline item-end (click)="editCare(water)" *ngIf="water.carerId == user.uid">
+            <ion-icon name="build"></ion-icon>
+          </button>
+        </ion-item>
+      </span>
+    </ion-list>
+
+    <ion-list *ngIf="careType=='weight'">
+      <span *ngFor="let weight of user.currentBaby.weight">
+        <ion-item *ngIf="weight.createDate>getDateLimit()">
+          <p>{{getDateinText(weight.createDate)}}:
+            <strong>{{weight.qte}}kg</strong> par
+            <strong>{{weight.carerName}}</strong>
+          </p>
+          <button ion-button small round outline item-end (click)="editCare(weight)" *ngIf="weight.carerId == user.uid">
+            <ion-icon name="build"></ion-icon>
+          </button>
+        </ion-item>
+      </span>
+    </ion-list>
+
+    <ion-list *ngIf="careType=='size'">
+      <span *ngFor="let size of user.currentBaby.size">
+        <ion-item *ngIf="size.createDate>getDateLimit()">
+          <p>{{getDateinText(size.createDate)}}:
+            <strong>{{size.qte}}cm</strong> par
+            <strong>{{size.carerName}}</strong>
+          </p>
+          <button ion-button small round outline item-end (click)="editCare(size)" *ngIf="size.carerId == user.uid">
+            <ion-icon name="build"></ion-icon>
+          </button>
+        </ion-item>
+      </span>
+    </ion-list>
+
+    <ion-list *ngIf="careType=='temperature'">
+      <span *ngFor="let temperature of user.currentBaby.temperature">
+        <ion-item *ngIf="temperature.createDate>getDateLimit()">
+          <p>{{getDateinText(temperature.createDate)}}:
+            <strong>{{temperature.qte}}°C</strong> par
+            <strong>{{temperature.carerName}}</strong>
+          </p>
+          <button ion-button small round outline item-end (click)="editCare(temperature)" *ngIf="temperature.carerId == user.uid">
+            <ion-icon name="build"></ion-icon>
+          </button>
+        </ion-item>
+      </span>
+    </ion-list>
+
+    <ion-list *ngIf="careType=='bath'">
+      <span *ngFor="let bath of user.currentBaby.bath">
+        <ion-item *ngIf="bath.createDate>getDateLimit()">
+          <p>{{getDateinText(bath.createDate)}}: par
+            <strong>{{bath.carerName}}</strong>
+          </p>
+          <button ion-button small round outline item-end (click)="editCare(bath)" *ngIf="bath.carerId == user.uid">
+            <ion-icon name="build"></ion-icon>
+          </button>
+        </ion-item>
+      </span>
+    </ion-list>
+
+    <ion-list *ngIf="careType=='nappy'">
+      <span *ngFor="let nappy of user.currentBaby.nappy">
+        <ion-item *ngIf="nappy.createDate>getDateLimit()">
+          <p>{{getDateinText(nappy.createDate)}}:
+            <span *ngIf="nappy.urine"> urine</span>
+            <span *ngIf="nappy.stool"> selles</span>
+            <span *ngIf="nappy.diarrhoea"> diarrhée</span> par
+            <strong>{{nappy.carerName}}</strong>
+          </p>
+          <button ion-button small round outline item-end (click)="editCare(nappy)" *ngIf="nappy.carerId == user.uid">
+            <ion-icon name="build"></ion-icon>
+          </button>
+        </ion-item>
+      </span>
+    </ion-list>
+
+    <ion-list *ngIf="careType=='sleep'">
+      <span *ngFor="let sleep of user.currentBaby.sleep">
+        <ion-item *ngIf="sleep.createDate>getDateLimit()">
+          <p>{{getDateinText(sleep.createDate)}}:
+            <strong>{{getDurationInText(sleep.duration)}}</strong> par
+            <strong>{{sleep.carerName}}</strong>
+          </p>
+          <button ion-button small round outline item-end (click)="editCare(sleep)" *ngIf="sleep.carerId == user.uid">
+            <ion-icon name="build"></ion-icon>
+          </button>
+        </ion-item>
+      </span>
+    </ion-list>
+
+    <ion-list *ngIf="careType=='comment'">
+      <span *ngFor="let comment of user.currentBaby.comment">
+        <ion-item *ngIf="comment.createDate>getDateLimit()">
+          <p>{{getDateinText(comment.createDate)}}: par
+            <strong>{{comment.carerName}}</strong>
+          </p>
+          <p>{{comment.content}}</p>
+          <button ion-button small round outline item-end (click)="editCare(comment)" *ngIf="comment.carerId == user.uid">
+            <ion-icon name="build"></ion-icon>
+          </button>
+        </ion-item>
+      </span>
+    </ion-list>
+
+    <ion-list *ngIf="careType=='meal'">
+      <span *ngFor="let meal of user.currentBaby.meal">
+        <ion-item *ngIf="meal.createDate>getDateLimit()">
+          <p>{{getDateinText(meal.createDate)}}: par
+            <strong>{{meal.carerName}}</strong>
+          </p>
+          <p>{{meal.content}}</p>
+          <button ion-button small round outline item-end (click)="editCare(meal)" *ngIf="meal.carerId == user.uid">
+            <ion-icon name="build"></ion-icon>
+          </button>
+        </ion-item>
+      </span>
+    </ion-list>
+
+  </ion-card>
+
+
+</ion-content>

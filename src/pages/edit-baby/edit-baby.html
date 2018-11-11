@@ -1,0 +1,81 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{user.currentBaby.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="secondaryBack" padding>
+  <ion-card padding>
+    <ion-card-content>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img [src]="getAvatar()">
+        </ion-thumbnail>
+        <ion-label stacked>Fecha de nacimiento</ion-label>
+        <ion-datetime cancelText="Annuler" doneText="Ok" displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="birthdate"></ion-datetime>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card padding>
+    <ion-card-content>
+      <ion-list>
+        <p>Alergias conocidas</p>
+        <ion-item *ngFor="let allergyDetail of newBaby.allergy; index as i">
+          <p>{{allergyDetail}}</p>
+          <button (click)="removeAllergy(i)" ion-button item-end small color="danger">
+            <ion-icon name="remove-circle"></ion-icon>
+          </button>
+        </ion-item>
+        <div class="flexAround">
+          <button (click)="addAllergy()" ion-button small>Guardar</button>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card padding>
+    <ion-card-content>
+      <ion-item>
+        <ion-label stacked>Nota:</ion-label>
+        <ion-textarea [(ngModel)]="newBaby.note"></ion-textarea>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card padding>
+    <ion-card-content>
+      <ion-list>
+        <p>Personas de confianza</p>
+        <ion-item *ngFor="let trustedPeople of newBaby.trustedPeople; index as i">
+          <p>{{trustedPeople.nickName}}</p>
+          <button ion-button item-end small color="danger" (click)="removeTrustedPeople(i)">
+            <ion-icon name="remove-circle"></ion-icon>
+          </button>
+        </ion-item>
+        <div class="flexAround">
+          <button (click)="addNewPeople()" ion-button small>Guardar</button>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <div class="flexAround">
+        <button ion-fab class="danger" (click)="confirmDeleteBaby()">
+          <ion-icon name="remove"></ion-icon>
+        </button>
+        <button ion-fab (click)="cancel()">
+          <ion-icon name="undo"></ion-icon>
+        </button>
+        <button ion-fab (click)="updateBaby()">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,204 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{user.currentBaby.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="secondaryBack" padding>
+  <ion-card>
+    <ion-card-content>
+
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img [src]="getAvatar()">
+        </ion-thumbnail>
+        <h1>{{user.currentBaby.name}}</h1>
+        <p>Nacido el: {{user.currentBaby.getBirhDate()}}</p>
+      </ion-item>
+
+      <p class="textCenter turning">
+        <ion-icon (click)="accordion()" name="arrow-down"></ion-icon>
+      </p>
+      <p class="textCenter turning off">
+        <ion-icon (click)="accordion()" name="arrow-up"></ion-icon>
+      </p>
+
+      <div class="accordion">
+        <p>
+          <strong>Responsable: {{motherName}} </strong>
+        </p>
+        <p>
+          <strong>Alergias:</strong>
+          <span *ngFor="let allergy of user.currentBaby.allergy; index as i"> {{allergy}}</span>
+        </p>
+        <p>
+          <strong>Persona de confianza:</strong>
+          <span *ngFor="let trustedPeople of user.currentBaby.trustedPeople; index as i"> {{trustedPeople.nickName}}</span>
+        </p>
+        <p>
+          <strong>Notas:</strong> {{user.currentBaby.note}} </p>
+        <div *ngIf="user.uid==user.currentBaby.motherId" class="flexAround">
+          <button ion-fab mini (click)="goEditBaby()">
+            <ion-icon name="build"></ion-icon>
+          </button>
+        </div>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <div class="flexAround">
+        <button ion-fab (click)="newCare()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+        <button ion-fab (click)="goDisplayCares('milk')">
+          <ion-icon name="stats"></ion-icon>
+        </button>
+        <button ion-fab (click)="goCalendar()">
+          <i class="flaticon-calendar"></i>
+        </button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="user.loadedCares < careList.length">
+    <div class="flexAround">
+      <img src="assets/imgs/loader.gif" class="loader" alt="">
+    </div>
+  </ion-card>
+
+
+  <ion-card *ngIf="user.loadedCares >= careList.length">
+    <ion-card-content>
+      <h2 class="textCenter">Últimos cuidados</h2>
+      <p class="textCenter">por categoría</p>
+      <br>
+
+      <!--******************* Milk *****************************************************************************-->
+      <div class="lastCare">
+        <p *ngIf="user.currentBaby.milk.length>0">
+          <i class="flaticon-milk"></i>
+          <strong>{{user.currentBaby.milk[0].qte}}ml</strong> {{getDateFromNow(user.currentBaby.milk[0].createDate)}} por
+          <strong>{{user.currentBaby.milk[0].carerName}}</strong>
+        </p>
+
+        <p *ngIf="user.currentBaby.milk.length==0">
+          <i class="flaticon-milk"></i>Ningun biberón aún</p>
+      </div>
+
+      <!--******************* water *****************************************************************************-->
+      <div class="lastCare">
+        <p *ngIf="user.currentBaby.water.length>0">
+          <i class="flaticon-water"></i>
+          <strong>{{user.currentBaby.water[0].qte}}ml</strong> {{getDateFromNow(user.currentBaby.water[0].createDate)}} por
+          <strong>{{user.currentBaby.water[0].carerName}}</strong>
+        </p>
+
+        <p *ngIf="user.currentBaby.water.length==0">
+          <i class="flaticon-water"></i> Ningún biberón aún</p>
+      </div>
+
+      <!--******************* meal *****************************************************************************-->
+      <div class="lastCare">
+        <p *ngIf="user.currentBaby.meal.length>0">
+          <ion-icon name="restaurant"></ion-icon> {{getDateFromNow(user.currentBaby.meal[0].createDate)}} por
+          <strong>{{user.currentBaby.meal[0].carerName}}</strong>:</p>
+        <p *ngIf="user.currentBaby.meal.length>0">{{user.currentBaby.meal[0].content}}</p>
+
+        <p *ngIf="user.currentBaby.meal.length==0">
+          <ion-icon name="restaurant"></ion-icon> Ninguna comida solida registrada</p>
+      </div>
+
+      <!--******************* nappy *****************************************************************************-->
+      <div class="lastCare">
+        <p *ngIf="user.currentBaby.nappy.length>0">
+          <i class="flaticon-nappy"></i> {{getDateFromNow(user.currentBaby.nappy[0].createDate)}} por
+          <strong>{{user.currentBaby.nappy[0].carerName}}</strong> (
+          <span *ngIf="user.currentBaby.nappy[0].urine"> horina</span>
+          <span *ngIf="user.currentBaby.nappy[0].stool"> caca</span>
+          <span *ngIf="user.currentBaby.nappy[0].diarrhoea"> diarrea</span>
+          )</p>
+
+        <p *ngIf="user.currentBaby.nappy.length==0">
+          <i class="flaticon-nappy"></i> Ningúan cambio de pañales realizado</p>
+      </div>
+
+      <!--******************* bath *****************************************************************************-->
+      <div class="lastCare">
+        <p *ngIf="user.currentBaby.bath.length>0">
+          <i class="flaticon-bath"></i> {{getDateFromNow(user.currentBaby.bath[0].createDate)}} por
+          <strong>{{user.currentBaby.bath[0].carerName}}</strong>
+        </p>
+
+        <p *ngIf="user.currentBaby.bath.length==0">
+          <i class="flaticon-bath"></i> Ningún baño</p>
+      </div>
+
+      <!--******************* sleep *****************************************************************************-->
+      <div class="lastCare">
+        <p *ngIf="user.currentBaby.sleep.length>0">
+          <i class="flaticon-sleep"></i> {{getDateFromNow(user.currentBaby.sleep[0].createDate)}} por
+          <strong>{{user.currentBaby.sleep[0].carerName}}</strong> durée {{getDuration(user.currentBaby.sleep[0].duration)}}
+        </p>
+
+        <p *ngIf="user.currentBaby.sleep.length==0">
+          <i class="flaticon-sleep"></i> Ningún sueño registrado</p>
+      </div>
+
+      <!--******************* weight *****************************************************************************-->
+      <div class="lastCare">
+        <p *ngIf="user.currentBaby.weight.length>0">
+          <i class="flaticon-weight"></i>
+          <strong>{{user.currentBaby.weight[0].qte}}kg</strong> {{getDateFromNow(user.currentBaby.weight[0].createDate)}} por
+          <strong>{{user.currentBaby.weight[0].carerName}}</strong>
+        </p>
+
+        <p *ngIf="user.currentBaby.weight.length==0">
+          <i class="flaticon-weight"></i> Ningún peso registrado</p>
+      </div>
+
+      <!--******************* size *****************************************************************************-->
+      <div class="lastCare">
+        <p *ngIf="user.currentBaby.size.length>0">
+          <ion-icon name="resize"></ion-icon>
+          <strong>{{user.currentBaby.size[0].qte}}cm</strong> {{getDateFromNow(user.currentBaby.size[0].createDate)}} por
+          <strong>{{user.currentBaby.size[0].carerName}}</strong>
+        </p>
+
+        <p *ngIf="user.currentBaby.size.length==0">
+          <i class="flaticon-milk"></i>Altura no registrada</p>
+      </div>
+
+      <!--******************* temperature *****************************************************************************-->
+      <div class="lastCare">
+        <p *ngIf="user.currentBaby.temperature.length>0">
+          <i class="flaticon-temperature"></i>
+          <strong>{{user.currentBaby.temperature[0].qte}}°C</strong> {{getDateFromNow(user.currentBaby.temperature[0].createDate)}}
+          por
+          <strong>{{user.currentBaby.temperature[0].carerName}}</strong>
+        </p>
+
+        <p *ngIf="user.currentBaby.temperature.length==0">
+          <i class="flaticon-temperature"></i> Temperatura no registrada aún</p>
+      </div>
+
+      <!--******************* comment *****************************************************************************-->
+      <div class="lastCare">
+        <p *ngIf="user.currentBaby.comment.length>0">
+          <i class="flaticon-comment"></i> {{getDateFromNow(user.currentBaby.comment[0].createDate)}} por
+          <strong>{{user.currentBaby.comment[0].carerName}}</strong>:</p>
+        <p *ngIf="user.currentBaby.comment.length>0">{{user.currentBaby.comment[0].content}}</p>
+
+        <p *ngIf="user.currentBaby.comment.length==0">
+          <i class="flaticon-comment"></i> Ningún comentario</p>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

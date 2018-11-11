@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+       Crear cuenta
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="secondaryBack" padding>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="signupForm" (submit)="signupUser()" novalidate>
+    
+        <ion-item>
+          <ion-label stacked>Usuario</ion-label>
+          <ion-input formControlName="nickName" type="text" placeholder="pseudo" [class.invalid]="!signupForm.controls.nickName.valid && blur">
+          </ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label stacked>Email</ion-label>
+          <ion-input formControlName="email" type="email" placeholder="email" [class.invalid]="!signupForm.controls.email.valid && blur">
+          </ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label stacked>Contraseña</ion-label>
+          <ion-input formControlName="password" type="password" placeholder="mot de passe" [class.invalid]="!signupForm.controls.password.valid && blur">
+          </ion-input>
+        </ion-item>
+    
+        <button ion-button block type="submit" [disabled]="!signupForm.valid">
+          Crear una cuenta
+        </button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

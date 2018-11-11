@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-buttons start>
+        <button ion-button icon-only (click)="cancel()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>Detalle del evento</ion-title>
+    </ion-navbar>
+  </ion-header>
+   
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-input type="text" placeholder="Titre" [(ngModel)]="event.title"></ion-input>
+      </ion-item>
+   
+      <ion-item>
+        <ion-label>Inicio</ion-label>
+        <ion-datetime cancelText="Annuler" doneText="Ok" displayFormat="DD/MM/YYYY HH:mm" pickerFormat="D MMM :HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
+      </ion-item>
+   
+      <ion-item>
+        <ion-label>Fin</ion-label>
+        <ion-datetime cancelText="Annuler" doneText="Ok" displayFormat="DD/MM/YYYY HH:mm" pickerFormat="D MMM :HH:mm"  [(ngModel)]="event.endTime" [min]="minDate"></ion-datetime>
+      </ion-item>
+   
+      <ion-item>
+        <ion-label>Todo el día</ion-label>
+        <ion-checkbox [(ngModel)]="event.allDay"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+   
+    <button ion-button full icon-left (click)="save()">
+      <ion-icon name="checkmark"></ion-icon> Guardar
+    </button>
+  </ion-content>

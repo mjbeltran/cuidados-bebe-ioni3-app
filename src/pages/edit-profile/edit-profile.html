@@ -1,0 +1,48 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Cuenta</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="secondaryBack" padding>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label stacked>Usuario</ion-label>
+        <ion-input type="text" name="nickName" id="nickName" [(ngModel)]="updatedUser.nickName"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Nombre</ion-label>
+        <ion-input type="text" name="firstName" id="firstName" [(ngModel)]="updatedUser.firstName"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Aellidos</ion-label>
+        <ion-input type="text" name="lastName" id="lastName" [(ngModel)]="updatedUser.lastName"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Teléfono de emergencia</ion-label>
+        <ion-input type="number" name="phone" id="phone" [(ngModel)]="updatedUser.phone"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <div class="flexAround">
+        <button ion-fab (click)="goBack()">
+          <ion-icon name="undo"></ion-icon>
+        </button>
+        <button *ngIf="updatedUser.nickName.length > 3" ion-fab (click)="updateProfil()">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

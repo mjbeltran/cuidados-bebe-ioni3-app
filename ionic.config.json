@@ -1,0 +1,8 @@
+{
+  "name": "babyCare",
+  "app_id": "12c1a2a9",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

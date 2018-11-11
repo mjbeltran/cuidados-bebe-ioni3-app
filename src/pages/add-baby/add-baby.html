@@ -1,0 +1,68 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Nuevo Bebé</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="secondaryBack" padding>
+
+  <ion-card padding>
+    <ion-card-content>
+      <ion-item>
+        <ion-label stacked>Nombre:</ion-label>
+        <ion-input type="text" [(ngModel)]="newBaby.name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Fecha de nacimiento</ion-label>
+        <ion-datetime cancelText="Annuler" doneText="Ok" displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="birthdate"></ion-datetime>
+      </ion-item>
+
+      <ion-list>
+        <ion-label stacked>Alergias conocidas</ion-label>
+        <ion-item *ngFor="let allergyDetail of newBaby.allergy; index as i">
+          <p>{{allergyDetail}}</p>
+          <button (click)="removeAllergy(i)" ion-button item-end small color="danger">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-item>
+
+        <div class="flexAround">
+          <button (click)="addAllergy()" ion-button small>Guardar</button>
+        </div>
+      </ion-list>
+
+      <ion-item>
+        <ion-label stacked>Nota:</ion-label>
+        <ion-textarea [(ngModel)]="newBaby.note"></ion-textarea>
+      </ion-item>
+    </ion-card-content>
+
+    <ion-list>
+      <ion-label stacked>Persona de confianza</ion-label>
+      <ion-item *ngFor="let trustedPeople of newBaby.trustedPeople; index as i">
+        <p>{{trustedPeople.nickName}}</p>
+        <button ion-button item-end small color="danger" (click)="removeTrustedPeople(i)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item>
+
+      <div class="flexAround">
+        <button (click)="addNewPeople()" ion-button small>Guardar</button>
+      </div>
+    </ion-list>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <div class="flexAround">
+        <button ion-button (click)="cancel()">Cancelar</button>
+        <button ion-button *ngIf="isNameValid()" (click)="addBaby()">Guardar</button>
+        <button ion-button outline *ngIf="!isNameValid()">Guardar</button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

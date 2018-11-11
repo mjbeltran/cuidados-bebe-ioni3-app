@@ -1,0 +1,45 @@
+<ion-content class="secondaryBack" padding>
+    <div padding-horizontal text-center class="animated fadeInDown">
+        <!--  <img src="../assets/img/icon-house.png"/> -->
+    
+
+      <img width="50%" height="50%" src="../assets/imgs/logo.png"/>
+      <h2 ion-text class="text-primary">
+        <strong>Cuidados Bebé</strong>
+      </h2>
+    </div>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
+        <ion-item>
+          <ion-label stacked>Email</ion-label>
+          <ion-input formControlName="email" type="email" placeholder="Email" [class.invalid]="!loginForm.controls.email.valid && blur"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Contraseña</ion-label>
+          <ion-input formControlName="password" type="password" placeholder="Contraseña" [class.invalid]="!loginForm.controls.password.valid && blur"></ion-input>
+        </ion-item>
+
+        <button ion-button block type="submit" [disabled]="!loginForm.valid">
+          Connexión
+        </button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <button ion-button block clear (click)="goToSignup()">
+      Crear una nueva cuenta
+    </button>
+
+    <button ion-button block clear (click)="goToResetPassword()">
+      Contraseña olvidada
+    </button>
+  </ion-card>
+
+ <!--- <div>
+    <p (click)="goCgu()" color="dark" class="textCenter">Condiciones generales</p>
+  </div>-->
+
+</ion-content>

@@ -1,0 +1,81 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Modificar</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="secondaryBack" padding>
+  <ion-card padding>
+    <ion-card-header class="textCenter">
+      {{legends.title}}
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Date</ion-label>
+        <ion-datetime cancelText="Annuler" doneText="Ok" displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="careDate"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Heure</ion-label>
+        <ion-datetime cancelText="Annuler" doneText="Ok" displayFormat="HH:mm" pickerFormat="HH:mm" [(ngModel)]="careDate"></ion-datetime>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item *ngIf="legends.type=='qte'">
+        <ion-label>{{legends.legend}}</ion-label>
+        <ion-input type="number" name="qte" id="qte" [(ngModel)]="careContent.qte"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="legends.type=='text'">
+        <ion-label stacked>{{legends.legend}}</ion-label>
+        <ion-input type="text" name="content" id="content" [(ngModel)]="careContent.content"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="legends.type=='duration'">
+        <p>Durée</p>
+      </ion-item>
+      <ion-item *ngIf="legends.type=='duration'">
+        <ion-label>Heures</ion-label>
+        <ion-input type="number" name="hour" id="hour" [(ngModel)]="duration.hour"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="legends.type=='duration'">
+        <ion-label>Minutes</ion-label>
+        <ion-input type="number" name="minute" id="minute" [(ngModel)]="duration.minute"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="legends.type=='nappy'">
+        <ion-label>Urine</ion-label>
+        <ion-toggle [(ngModel)]="careContent.urine"></ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="legends.type=='nappy'">
+        <ion-label>Selles</ion-label>
+        <ion-toggle [(ngModel)]="careContent.stool"></ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="legends.type=='nappy'">
+        <ion-label>Diarrhée</ion-label>
+        <ion-toggle [(ngModel)]="careContent.diarrhoea"></ion-toggle>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <div class="flexAround">
+        <button ion-fab class="danger" (click)="deleteCare()">
+          <ion-icon name="remove"></ion-icon>
+        </button>
+        <button ion-fab (click)="cancel()">
+          <ion-icon name="undo"></ion-icon>
+        </button>
+        <button ion-fab (click)="apply()">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

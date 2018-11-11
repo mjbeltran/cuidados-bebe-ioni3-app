@@ -1,0 +1,15 @@
+page-calendar {
+    .calendar {
+        .table {
+            background-color: #ffffff;
+        }
+        thead {
+            //background-color: map-get($map: $colors, $key: primary);
+            background: linear-gradient(to bottom, lighten(map-get($map: $colors, $key: primary), 20%), map-get($map: $colors, $key: primary) 25%,darken(map-get($map: $colors, $key: primary), 10%));
+            color: white;
+        }
+        ion-slides, .event-detail-container {
+            box-shadow: 3px 3px 5px rgba($color: #000000, $alpha: 0.6)
+        }
+    }
+}
