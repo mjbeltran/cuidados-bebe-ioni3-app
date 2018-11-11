@@ -36,27 +36,27 @@
         <ion-input type="text" name="content" id="content" [(ngModel)]="careContent.content"></ion-input>
       </ion-item>
       <ion-item *ngIf="legends.type=='duration'">
-        <p>Durée</p>
+        <p>Duración</p>
       </ion-item>
       <ion-item *ngIf="legends.type=='duration'">
-        <ion-label>Heures</ion-label>
+        <ion-label>Horas</ion-label>
         <ion-input type="number" name="hour" id="hour" [(ngModel)]="duration.hour"></ion-input>
       </ion-item>
       <ion-item *ngIf="legends.type=='duration'">
-        <ion-label>Minutes</ion-label>
+        <ion-label>Minutos</ion-label>
         <ion-input type="number" name="minute" id="minute" [(ngModel)]="duration.minute"></ion-input>
       </ion-item>
 
       <ion-item *ngIf="legends.type=='nappy'">
-        <ion-label>Urine</ion-label>
+        <ion-label>Horina</ion-label>
         <ion-toggle [(ngModel)]="careContent.urine"></ion-toggle>
       </ion-item>
       <ion-item *ngIf="legends.type=='nappy'">
-        <ion-label>Selles</ion-label>
+        <ion-label>Caca</ion-label>
         <ion-toggle [(ngModel)]="careContent.stool"></ion-toggle>
       </ion-item>
       <ion-item *ngIf="legends.type=='nappy'">
-        <ion-label>Diarrhée</ion-label>
+        <ion-label>Diarreas</ion-label>
         <ion-toggle [(ngModel)]="careContent.diarrhoea"></ion-toggle>
       </ion-item>
     </ion-card-content>

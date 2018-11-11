@@ -17,9 +17,9 @@ export class CalendarPage {
   selectedDay = new Date();
 
   calendar = {
-    mode: 'month',
-    noEventsLabel: "Pas d'évènement",
-    allDayLabel: "Toute la journée",
+    mode: 'mes',
+    noEventsLabel: "Ningún evento",
+    allDayLabel: "Todo el día",
     currentDate: new Date()
   };
 

@@ -171,7 +171,8 @@ export class EditBabyPage {
         let newPeople = {
           id: people[0].id,
           nickName: people[0].nickName,
-          email: people[0].email
+          email: people[0].email,
+          phone : people[0].phone
         }
         this.newBaby.trustedPeople.push(newPeople);
         console.log(this.newBaby.trustedPeople);

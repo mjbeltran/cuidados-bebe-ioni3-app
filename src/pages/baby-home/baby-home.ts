@@ -85,7 +85,7 @@ export class BabyHomePage {
           }
         },
         {
-          icon: 'flaticon-water',
+         // icon: 'flaticon-water',
           text: "Biberon de agua",
           handler: () => {
             this.newWater();

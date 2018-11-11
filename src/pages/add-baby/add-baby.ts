@@ -83,17 +83,17 @@ export class AddBabyPage {
 
   addAllergy() {
     const prompt = this.alertCtrl.create({
-      title: "Ajouter une allergie",
+      title: "Añadir alergia",
       inputs: [
         {
           name: 'allergy',
-          placeholder: 'texte',
+          placeholder: 'texto',
           type: 'text'
         },
       ],
       buttons: [
         {
-          text: 'Annuler',
+          text: 'Cancelar',
           handler: data => {
             console.log('Cancel clicked');
           }
@@ -117,18 +117,18 @@ export class AddBabyPage {
 
   addNewPeople() {
     const prompt = this.alertCtrl.create({
-      title: "Ajouter une personne de confiance",
-      message: "Entrez son email",
+      title: "Añadir un cuidador",
+      message: "escribir su email",
       inputs: [
         {
           name: 'email',
-          placeholder: 'texte',
+          placeholder: 'texto',
           type: 'text'
         },
       ],
       buttons: [
         {
-          text: 'Annuler',
+          text: 'Cancelar',
           handler: data => {
             console.log('Cancel clicked');
           }
@@ -139,7 +139,7 @@ export class AddBabyPage {
             if (this.validateEmail(data.email)) {
               this.addTrustedPeople(data.email);
             } else {
-              this.showMsg("Adresse mail invalide")
+              this.showMsg("Email incorrecto")
             }
           }
         }
@@ -160,18 +160,19 @@ export class AddBabyPage {
         }
       }
       if (people.length < 1) {
-        this.showMsg("Cette personne ne possede pas l'application");
+        this.showMsg("Este cuidador no está registrado en la aplicación");
         return
       }
       if (this.newBaby.trustedPeople.includes(people[0].id)) {
-        this.showMsg("Cette personne est déjà dans la liste");
+        this.showMsg("Este cuidador está ya en la lista de cuidadores");
       } else if (people[0].id == this.user.uid) {
-        this.showMsg("vous êtes déjà responsable de ce bébé");
+        this.showMsg("Usted ya es cuidador de este bebé");
       }
       else {
         let newPeople = {
           id: people[0].id,
           nickName: people[0].nickName,
+          telephone : people[0].phone,
           email: people[0].email
         }
         this.newBaby.trustedPeople.push(newPeople);
@@ -191,7 +192,7 @@ export class AddBabyPage {
       let birthDate = parseInt(moment(this.birthdate).format('x'));
       let dateNow = parseInt(moment(Date.now()).format('x'));
       if (birthDate > dateNow) {
-        this.showMsg("Votre bébé n'est pas encore né !")
+        this.showMsg("Su bebé no ha nacido aún!")
       } else {
         let loading = this.loadingCtrl.create();
         loading.present();

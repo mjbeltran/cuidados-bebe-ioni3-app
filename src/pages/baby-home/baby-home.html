@@ -35,8 +35,10 @@
           <span *ngFor="let allergy of user.currentBaby.allergy; index as i"> {{allergy}}</span>
         </p>
         <p>
-          <strong>Persona de confianza:</strong>
-          <span *ngFor="let trustedPeople of user.currentBaby.trustedPeople; index as i"> {{trustedPeople.nickName}}</span>
+          <strong>Cuidador:</strong>
+          <span *ngFor="let trustedPeople of user.currentBaby.trustedPeople; index as i"> 
+            {{trustedPeople.nickName}}<p>/{{trustedPeople.phone}}</p>
+            </span>
         </p>
         <p>
           <strong>Notas:</strong> {{user.currentBaby.note}} </p>
@@ -143,7 +145,7 @@
       <div class="lastCare">
         <p *ngIf="user.currentBaby.sleep.length>0">
           <i class="flaticon-sleep"></i> {{getDateFromNow(user.currentBaby.sleep[0].createDate)}} por
-          <strong>{{user.currentBaby.sleep[0].carerName}}</strong> durée {{getDuration(user.currentBaby.sleep[0].duration)}}
+          <strong>{{user.currentBaby.sleep[0].carerName}}</strong> duración {{getDuration(user.currentBaby.sleep[0].duration)}}
         </p>
 
         <p *ngIf="user.currentBaby.sleep.length==0">

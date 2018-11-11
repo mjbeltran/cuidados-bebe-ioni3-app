@@ -31,7 +31,7 @@
           </button>
         </ion-item>
         <div class="flexAround">
-          <button (click)="addAllergy()" ion-button small>Guardar</button>
+          <button (click)="addAllergy()" ion-button small>Añadir</button>
         </div>
       </ion-list>
     </ion-card-content>
@@ -52,12 +52,13 @@
         <p>Personas de confianza</p>
         <ion-item *ngFor="let trustedPeople of newBaby.trustedPeople; index as i">
           <p>{{trustedPeople.nickName}}</p>
+          <p>{{trustedPeople.phone}}</p>
           <button ion-button item-end small color="danger" (click)="removeTrustedPeople(i)">
             <ion-icon name="remove-circle"></ion-icon>
           </button>
         </ion-item>
         <div class="flexAround">
-          <button (click)="addNewPeople()" ion-button small>Guardar</button>
+          <button (click)="addNewPeople()" ion-button small>Añadir</button>
         </div>
       </ion-list>
     </ion-card-content>
