@@ -78,10 +78,10 @@ export class CalendarPage {
 
     const prompt = this.alertCtrl.create({
       title: '' + event.title,
-      message: 'Du: ' + start + '<br>au: ' + end,
+      message: 'Del: ' + start + '<br>al: ' + end,
       buttons: [
         {
-          text: 'Supprimer',
+          text: 'Cancelar',
           handler: data => {
             this.deleteEvent(event)
           }

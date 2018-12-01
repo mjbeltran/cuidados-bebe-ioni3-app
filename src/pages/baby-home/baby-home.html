@@ -121,7 +121,7 @@
         <p *ngIf="user.currentBaby.nappy.length>0">
           <i class="flaticon-nappy"></i> {{getDateFromNow(user.currentBaby.nappy[0].createDate)}} por
           <strong>{{user.currentBaby.nappy[0].carerName}}</strong> (
-          <span *ngIf="user.currentBaby.nappy[0].urine"> horina</span>
+          <span *ngIf="user.currentBaby.nappy[0].urine"> pipi</span>
           <span *ngIf="user.currentBaby.nappy[0].stool"> caca</span>
           <span *ngIf="user.currentBaby.nappy[0].diarrhoea"> diarrea</span>
           )</p>

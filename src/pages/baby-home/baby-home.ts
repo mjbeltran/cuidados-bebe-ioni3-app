@@ -248,8 +248,8 @@ export class BabyHomePage {
     prompt.setTitle('Presencia en el cambio:');
     prompt.addInput({
       type: 'checkbox',
-      label: 'horina',
-      value: 'horina',
+      label: 'pipi',
+      value: 'pipi',
       checked: false
     });
     prompt.addInput({
@@ -268,7 +268,7 @@ export class BabyHomePage {
     prompt.addButton({
       text: 'Ok',
       handler: data => {
-        if (data.indexOf('horina') > -1) {
+        if (data.indexOf('pipi') > -1) {
           newNappy.urine = true
         };
         if (data.indexOf('caca') > -1) {

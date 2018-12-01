@@ -79,7 +79,7 @@ export class DisplayCaresPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private user: UserProvider
+    public user: UserProvider
   ) {
     this.careType = navParams.get('careType');
     this.timeScale = 'week';
